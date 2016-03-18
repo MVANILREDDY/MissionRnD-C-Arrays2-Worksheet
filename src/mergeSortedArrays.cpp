@@ -45,8 +45,8 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 			merge = (struct transaction*)malloc((ALen + BLen)*sizeof(struct transaction));
 			while (index<(ALen + BLen))
 			{
-				A_date = 10 * (A[i].date[0] - '0') + A[i].date[1] - '0' + (10 * A[i].date[3] + A[i].date[4] - 11 * '0') * 31 + (1000 * A[i].date[6] + 100 * A[i].date[7] + 10 * A[i].date[8] + A[i].date[9] - 1111 * '0') * 31 * 12;
-				B_date = 10 * (B[j].date[0] - '0') + B[j].date[1] - '0' + (10 * B[j].date[3] + B[j].date[4] - 11 * '0') * 31 + (1000 * B[j].date[6] + 100 * B[j].date[7] + 10 * B[j].date[8] + B[j].date[9] - 1111 * '0') * 31 * 12;
+				A_date = (10 * A[i].date[0]+ A[i].date[1]) + (10 * A[i].date[3] + A[i].date[4]) * 31 + (1000 * A[i].date[6] + 100 * A[i].date[7] + 10 * A[i].date[8] + A[i].date[9]) * 31 * 12;
+				B_date = (10 * B[j].date[0] + B[j].date[1]) + (10 * B[j].date[3] + B[j].date[4]) * 31 + (1000 * B[j].date[6] + 100 * B[j].date[7] + 10 * B[j].date[8] + B[j].date[9]) * 31 * 12;
 				if (i<ALen&&j<BLen)//i and j are indexes for A and B arrays.
 				{
 					if (A_date <= B_date)   //A_date & B_date are given dates after converting them to integers based on day prototype.  

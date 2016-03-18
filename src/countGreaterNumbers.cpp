@@ -25,13 +25,13 @@ int countGreaterNumbers(struct transaction *Arr, int len, char *date)
 	if (Arr&&date)
 	{
 		int i = 0, g_date, a_date, count = 0, eval = 1;
-		g_date = 10 * (date[0] - '0') + date[1] - '0' + (10 * date[3] + date[4] - 11 * '0') * 31 + (1000 * date[6] + 100 * date[7] + 10 * date[8] + date[9] - 1111 * '0') * 31 * 12;
+		g_date = (10 * date[0] + date[1])  + (10 * date[3] + date[4]) * 31 + (1000 * date[6] + 100 * date[7] + 10 * date[8] + date[9]) * 31 * 12;
 		while (i<len)
 		{
 			eval = validation(date)*validation(Arr[i].date);// eval is used to check input dates are valid or not.
 			if (eval)
 			{
-				a_date = 10 * (Arr[i].date[0] - '0') + Arr[i].date[1] - '0' + (10 * Arr[i].date[3] + Arr[i].date[4] - 11 * '0') * 31 + (1000 * Arr[i].date[6] + 100 * Arr[i].date[7] + 10 * Arr[i].date[8] + Arr[i].date[9] - 1111 * '0') * 31 * 12;
+				a_date = (10 * Arr[i].date[0] + Arr[i].date[1]) + (10 * Arr[i].date[3] + Arr[i].date[4]) * 31 + (1000 * Arr[i].date[6] + 100 * Arr[i].date[7] + 10 * Arr[i].date[8] + Arr[i].date[9]) * 31 * 12;
 				if (g_date<a_date)
 					count++;
 				i++;

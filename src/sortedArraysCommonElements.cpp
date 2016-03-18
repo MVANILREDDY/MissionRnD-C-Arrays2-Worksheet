@@ -33,8 +33,8 @@ struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen,
 	{
 		while (i<ALen&&j<BLen)//i and j are indexes for A and B arrays.
 		{
-			A_date = 10 * (A[i].date[0] - '0') + A[i].date[1] - '0' + (10 * A[i].date[3] + A[i].date[4] - 11 * '0') * 31 + (1000 * A[i].date[6] + 100 * A[i].date[7] + 10 * A[i].date[8] + A[i].date[9] - 1111 * '0') * 31 * 12;
-			B_date = 10 * (B[j].date[0] - '0') + B[j].date[1] - '0' + (10 * B[j].date[3] + B[j].date[4] - 11 * '0') * 31 + (1000 * B[j].date[6] + 100 * B[j].date[7] + 10 * B[j].date[8] + B[j].date[9] - 1111 * '0') * 31 * 12;
+			A_date = (10 *A[i].date[0]+ A[i].date[1]) + (10 * A[i].date[3] + A[i].date[4]) * 31 + (1000 * A[i].date[6] + 100 * A[i].date[7] + 10 * A[i].date[8] + A[i].date[9]) * 31 * 12;
+			B_date = (10 * B[j].date[0] + B[j].date[1]) + (10 * B[j].date[3] + B[j].date[4]) * 31 + (1000 * B[j].date[6] + 100 * B[j].date[7] + 10 * B[j].date[8] + B[j].date[9]) * 31 * 12;
 			eval = valid(A[i].date)*valid(B[j].date);
 			if (eval)
 			{
