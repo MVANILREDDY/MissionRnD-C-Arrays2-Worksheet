@@ -19,33 +19,42 @@ struct transaction {
 	char date[11];
 	char description[20];
 };
+int binary(struct transaction *Arr, int, int, char *date);//to determine greater count in logn complexity.
 int validation(char*);
 int countGreaterNumbers(struct transaction *Arr, int len, char *date)
 {
 	if (Arr&&date)
 	{
-		int i = 0, g_date, a_date, count = 0, eval = 1;
-		g_date = (10 * date[0] + date[1])  + (10 * date[3] + date[4]) * 31 + (1000 * date[6] + 100 * date[7] + 10 * date[8] + date[9]) * 31 * 12;
-		while (i<len)
-		{
-			eval = validation(date)*validation(Arr[i].date);// eval is used to check input dates are valid or not.
-			if (eval)
-			{
-				a_date = (10 * Arr[i].date[0] + Arr[i].date[1]) + (10 * Arr[i].date[3] + Arr[i].date[4]) * 31 + (1000 * Arr[i].date[6] + 100 * Arr[i].date[7] + 10 * Arr[i].date[8] + Arr[i].date[9]) * 31 * 12;
-				if (g_date<a_date)
-					count++;
-				i++;
-			}
-			else
-			{
-				return -1;
-			}
-		}
-		return count;
+		int count;
+		count = binary(Arr, 0, len - 1, date);
+		return (len - count);//count stores no of transactions less than given date including it,in given array
 	}
 	return -1;
 }
+int binary(struct transaction*Arr, int start, int end, char *date)
+{
+	int g_date, a_date, eval = 1;
+	if (start <= end)
+	{
+		int i = (start + end) / 2;//index for middle value in given transactions.
+		a_date = (10 * Arr[i].date[0] + Arr[i].date[1]) + (10 * Arr[i].date[3] + Arr[i].date[4]) * 31 + (1000 * Arr[i].date[6] + 100 * Arr[i].date[7] + 10 * Arr[i].date[8] + Arr[i].date[9]) * 31 * 12;
+		g_date = (10 * date[0] + date[1]) + (10 * date[3] + date[4]) * 31 + (1000 * date[6] + 100 * date[7] + 10 * date[8] + date[9]) * 31 * 12;
+		eval = validation(date)*validation(Arr[i].date);
+		if (eval)
+		{
+			if (g_date >= a_date)
+			{
+				return binary(Arr, i + 1, end, date);
+			}
+			else
+			{
+				return  binary(Arr, start, i - 1, date);
+			}
+		}
 
+		return i; 
+    }//finally we return number of transactions less than given date including it.
+}
 int validation(char* a)//function to check whether given input dates are valid or not.
 {
 	int day, m, yr, x = 0;
